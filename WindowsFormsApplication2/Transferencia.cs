@@ -15,19 +15,23 @@ namespace WindowsFormsApplication2
 {
     public partial class Transferencia : Form
     {
+        Conta[] contas;
         private Conta contaDestino;
         private Form1 aplicacaoPrincipal;
-      
+        private Conta contaOrigem;
+        private int i = 0;
         public Transferencia(Form1 aplicacaoPrincipal)
         {
             InitializeComponent();
             this.aplicacaoPrincipal = aplicacaoPrincipal;
+            int tamanho_de_contas = this.aplicacaoPrincipal.numero_de_contas();
+            this.contas = new Conta[tamanho_de_contas];
         }
+
 
         private void Transferencia_Load(object sender, EventArgs e)
         {
-            
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,18 +49,23 @@ namespace WindowsFormsApplication2
             }
             }
 
-        public void carregarComboBox(Conta[] contas)
+        public void carregarComboBox(Conta conta)
         {
-            foreach(Conta conta in contas)
-            {
-                comboDestino.Items.Add(conta.titular.nome);
-            }
+            comboDestino.Items.Add(conta.titular.nome);
+          
+            this.contas[i] = conta;
+            i++;
         }
 
         private void comboDestino_SelectedIndexChanged(object sender, EventArgs e)
         {
             int indexDestino = comboDestino.SelectedIndex;
-            contaDestino = this.aplicacaoPrincipal.enviarContas(indexDestino);
+            contaDestino = contas[indexDestino];
+        }
+
+        public void recebe_contaOrigem(Conta c)
+        {
+            this.contaOrigem = c;
         }
     }
 }

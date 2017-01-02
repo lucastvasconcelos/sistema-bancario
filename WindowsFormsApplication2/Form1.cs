@@ -109,13 +109,25 @@ namespace WB.CaixaEletronico.principal
         private void buttonTransferir_Click(object sender, EventArgs e)
         {
             Transferencia trans = new Transferencia(this);
-            trans.carregarComboBox(contas);
+            trans.recebe_contaOrigem(contaSelecionado);
+            foreach (Conta conta in contas)
+            {
+                if (!conta.Equals(contaSelecionado))
+                {
+                    trans.carregarComboBox(conta);
+                }
+            }
             trans.ShowDialog();
         }
 
         public Conta enviarContas(int i)
         {
             return contas[i];
+        }
+
+        public int numero_de_contas()
+        {
+            return contas.Length;
         }
        
 

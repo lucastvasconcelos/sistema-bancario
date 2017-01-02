@@ -41,13 +41,14 @@ namespace WB.CaixaEletronico.contas
 
         public bool Transfere(double valor_transfere,Conta destino)
         {
-            if(!this.Equals(destino))
+            if(this.Equals(destino))
             {
-                this.Saca(valor_transfere);
-                destino.Deposita(valor_transfere);
-                return true;
+                throw new ContasIguaisException();
             }
-            throw new ContasIguaisException(); 
+            this.Saca(valor_transfere);
+            destino.Deposita(valor_transfere);
+            return false;
+
         }
 
         public override bool Equals(object obj)
