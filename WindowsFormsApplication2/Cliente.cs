@@ -8,7 +8,7 @@ using WB.CaixaEletronico.exceptions;
 
 namespace WB.CaixaEletronico.usuario
 {
-    class Cliente
+    public class Cliente
     {
         public string nome;
         public string cpf;

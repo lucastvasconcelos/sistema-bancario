@@ -8,7 +8,7 @@ using WB.CaixaEletronico.exceptions;
 
 namespace WB.CaixaEletronico.contas
 {
-    abstract class Conta
+    public abstract class Conta
     {
         public int numero;
         public Cliente titular;

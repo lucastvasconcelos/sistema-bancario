@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WB.CaixaEletronico.usuario;
 using WB.CaixaEletronico.contas;
 using WB.CaixaEletronico.exceptions;
+using WindowsFormsApplication2;
 
 namespace WB.CaixaEletronico.principal
 {
@@ -18,7 +19,6 @@ namespace WB.CaixaEletronico.principal
         Conta[] contas;
         Conta contaSelecionado;
         Conta contaOrigem;
-        Conta contaDestino;
         public Form1()
         {
             InitializeComponent();
@@ -56,6 +56,7 @@ namespace WB.CaixaEletronico.principal
             {
                 MessageBox.Show("Utilizar somente números");
             }
+            
 
         }
 
@@ -70,8 +71,6 @@ namespace WB.CaixaEletronico.principal
             this.contas[1] = new ContaCorrente(Roberto);
             this.contas[1].Deposita(30);
             AdicionarNoBox(comboContas);
-            AdicionarNoBox(comboOrigem);
-            AdicionarNoBox(comboDestino);
         }
         //METODO PARA ADICIONAR AS CONTAS NO COMBOBOX
         private void AdicionarNoBox(ComboBox C)
@@ -92,11 +91,6 @@ namespace WB.CaixaEletronico.principal
         }
 
 
-        //TESTANDO ARRAY
-        private void botaoConta_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void comboContas_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -104,52 +98,74 @@ namespace WB.CaixaEletronico.principal
             contaSelecionado = contas[indexSelecionado];
             MostrarConta(contaSelecionado);
         }
+        //METODO DE TRANSFERENCIA QUE SERÁ UTILIZADO NO FORM TRANSFERENCIA
+        public void Transferir(Conta c, double valor)
+        {
+            contaSelecionado.Transfere(valor, c);
+            MostrarConta(contaSelecionado);
+        }
+
+        //BOTAO PARA INICIAR JANELA DE TRANSFÊNRENCIAS
+        private void buttonTransferir_Click(object sender, EventArgs e)
+        {
+            Transferencia trans = new Transferencia(this);
+            trans.carregarComboBox(contas);
+            trans.ShowDialog();
+        }
+
+        public Conta enviarContas(int i)
+        {
+            return contas[i];
+        }
+       
 
 
-        //TRANSFERENCIA ENTRE DUAS CONTAS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+        private void botaoConta_Click(object sender, EventArgs e)
+        {
+
+        }
         private void comboOrigem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int indexOrigem = comboOrigem.SelectedIndex;
-            contaOrigem = contas[indexOrigem];
+           
         }
 
         private void comboDestino_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int indexDestino = comboDestino.SelectedIndex;
-            contaDestino = contas[indexDestino];
+           
         }
-        //FINAL DA AREA DE TRANSFERENCIA UTILIZANDO COMBOBOX
-
-
-        private void buttonTransferir_Click(object sender, EventArgs e)
-        {
-            double valor_transferencia = Convert.ToDouble(textTransferencia.Text);
-            try
-            {
-                contaOrigem.Transfere(valor_transferencia, contaDestino);
-                trans_display.Text = "Transferência concluida com sucesso";
-            } catch (ContasIguaisException exception)
-            {
-                trans_display.Text = "Erro na transfêrencia";
-            }catch (SaldoInsuficienteException expection)
-            {
-                MessageBox.Show("Saldo insuficiente");
-            } catch (ArgumentException expection)
-            {
-                MessageBox.Show("Quantidade invalida");
-            } catch (FormatException exception)
-            {
-                MessageBox.Show("Utilizar somente números");
-            }
-
-            textTransferencia.Text = "";
-            MostrarConta(contaOrigem);
-
-        }
-
-
-        //ELEMENTOS AINDA NÃO IMPLEMENTADOS
-
+        
         private void textTitular_TextChanged(object sender, EventArgs e)
         {
 
