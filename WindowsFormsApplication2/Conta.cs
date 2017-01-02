@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WB.CaixaEletronico.usuario;
+using WB.CaixaEletronico.exceptions;
 
 namespace WB.CaixaEletronico.contas
 {
@@ -46,8 +47,7 @@ namespace WB.CaixaEletronico.contas
                 destino.Deposita(valor_transfere);
                 return true;
             }
-            return false;
-            throw new Exception; 
+            throw new ContasIguaisException(); 
         }
 
         public override bool Equals(object obj)

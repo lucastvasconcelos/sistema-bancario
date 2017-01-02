@@ -131,13 +131,24 @@ namespace WB.CaixaEletronico.principal
             } catch (ContasIguaisException exception)
             {
                 trans_display.Text = "Erro na transfêrencia";
+            }catch (SaldoInsuficienteException expection)
+            {
+                MessageBox.Show("Saldo insuficiente");
+            } catch (ArgumentException expection)
+            {
+                MessageBox.Show("Quantidade invalida");
+            } catch (FormatException exception)
+            {
+                MessageBox.Show("Utilizar somente números");
             }
+
             textTransferencia.Text = "";
             MostrarConta(contaOrigem);
 
         }
 
 
+        //ELEMENTOS AINDA NÃO IMPLEMENTADOS
 
         private void textTitular_TextChanged(object sender, EventArgs e)
         {

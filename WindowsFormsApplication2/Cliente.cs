@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WB.CaixaEletronico.exceptions;
 
+
 namespace WB.CaixaEletronico.usuario
 {
     class Cliente
